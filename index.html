@@ -5,43 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
-    <script>
-      function comicDownload() {
-        // Get the email from the query string
-        const params = new URLSearchParams({
-          email: "d.igolinskiy@innopolis.university",
-        });
-
-        // Fetch the ID from the Innopolis API
-        fetch(`https://fwd.innopolis.app/api/hw2?${params}`)
-          .then((response) => response.json())
-          .then((response) => {
-            const paramsID = new URLSearchParams({
-              num: response,
-            });
-            return fetch(`https://getxkcd.vercel.app/api/comic?${paramsID}`);
-          })
-          .then((response) => response.json())
-          .then((data) => {
-            // Display the comic on the page
-            const comicImg = document.getElementById("comic");
-            const title = document.getElementById("title");
-            const date = document.getElementById("date");
-            const alt = document.getElementById("alt");
-
-            comicImg.src = data.img;
-            title.textContent = data.title;
-            date.textContent = new Date(
-              data.year,
-              data.month - 1,
-              data.day
-            ).toLocaleDateString();
-            alt.textContent = data.alt;
-          })
-          .catch((error) => console.error(error));
-      }
-      comicDownload();
-    </script>
+    <script src="./bundle.js" defer></script>
   </head>
   <body>
     <header>
@@ -64,12 +28,11 @@
           <li>Project 3</li>
         </ul>
       </section>
-      <div>
+      <div id="imageContainer">
         <h2 id="title"></h2>
         <p id="date"></p>
-        <p id="alt"></p>
-        <img id="comic" />
-        <button onclick="comicDownload()">Look for new comic</button>
+        <!-- <img id="comic" /> -->
+        <button id="updateComic">Look for new comic</button>
       </div>
       <section id="contact">
         <h2>Contact</h2>
