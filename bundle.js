@@ -11,17 +11,14 @@ async function comicDownload() {
     const response2 = await fetch(`https://getxkcd.vercel.app/api/comic?${paramsID}`);
     const data = await response2.json();
     // Display the comic on the page
-    const comicImg = new Image();
+    // const comicImg = new Image();
+    const comicImg = document.getElementById("comic");
     const title = document.getElementById("title");
     const date = document.getElementById("date");
-    const imageContainer = document.getElementById("imageContainer");
     comicImg.src = data.img;
     comicImg.alt = data.alt;
     title.textContent = data.title;
     date.textContent = new Date(data.year, data.month - 1, data.day).toLocaleDateString();
-    comicImg.onload = () => {
-        imageContainer.appendChild(comicImg);
-    };
 }
 comicDownload();
 const button = document.getElementById("updateComic");

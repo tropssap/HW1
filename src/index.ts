@@ -17,10 +17,10 @@ async function comicDownload() {
   );
   const data: Comic = await response2.json();
   // Display the comic on the page
-  const comicImg = new Image();
+  // const comicImg = new Image();
+  const comicImg = document.getElementById("comic") as HTMLImageElement;
   const title = document.getElementById("title");
   const date = document.getElementById("date");
-  const imageContainer = document.getElementById("imageContainer");
   comicImg.src = data.img;
   comicImg.alt = data.alt;
   title.textContent = data.title;
@@ -29,9 +29,6 @@ async function comicDownload() {
     data.month - 1,
     data.day
   ).toLocaleDateString();
-  comicImg.onload = () => {
-    imageContainer.appendChild(comicImg);
-  };
 }
 comicDownload();
 const button = document.getElementById("updateComic");
